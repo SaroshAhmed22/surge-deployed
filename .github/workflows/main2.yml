@@ -38,10 +38,6 @@ jobs:
         
       - name: installing surge
         run:  npm install -g surge 
-        
-           
-      - name: building yarn
-        run: yarn build
-        
+ 
       - name: deploying on surge
         run:  surge ./build http://itchy-sleet.surge.sh/ --token ${{secrets.SURGE_TOKEN}}  
