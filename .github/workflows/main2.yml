@@ -36,5 +36,8 @@ jobs:
         with:
            cmd: install
         
+      - name: installing surge
+        run:  npm install -g surge 
+        
       - name: deploying on surge
         run:  surge ./build http://itchy-sleet.surge.sh/ --token ${{secrets.SURGE_TOKEN}}  
