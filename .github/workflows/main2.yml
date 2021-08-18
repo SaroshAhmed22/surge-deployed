@@ -20,21 +20,19 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.4.0
+    - name: Install Node.js
+      
+      uses: actions/setup-node@v2-beta
+      with: 
+         node-version: 12 
+    - uses: borales/actions-yarn@v2.0.0 # `yarn install`
       with:
-         version: 12
-         
-   
-    - name: GitHub Action for Yarn
-      uses:  Borales/actions-yarn@v2.3.0
-      with:
-    # Yarn command
-         cmd:
-            install
-         
-    - name: installing surge
-      run:  npm install -g surge
+         cmd: install 
+    - name: Build React App                              
+      run: yarn build 
+           
+    - name: Install Surge
+      run: npm install --global surge  
 
     - name: deploying on surge
       run:  surge ./build http://itchy-sleet.surge.sh/ --token ${{secrets.SURGE_TOKEN}}  
